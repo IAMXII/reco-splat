@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>ReCo-Splat</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+ReCo-Splat:
+<br>
+Redundancy-aware Compact Feed-forward Gaussian Splatting
+</h1>
+
+
+<p class="authors">
+Anonymous CVPR Submission
+</p>
+
+
+<div class="buttons">
+
+<a>Paper</a>
+<a>Code</a>
+<a>Dataset</a>
+
+</div>
+
+
+<img class="teaser"
+src="assets/teaser.png">
+
+
+</header>
+
+
+
+<section>
+
+<h2>Abstract</h2>
+
+<p>
+
+Feed-forward 3D Gaussian Splatting enables efficient scene reconstruction
+by directly predicting Gaussian representations from sparse input images.
+However, existing approaches generate primitives according to observation
+density rather than intrinsic scene complexity, resulting in redundant
+Gaussian representations.
+
+<br><br>
+
+We propose <b>ReCo-Splat</b>, a compact feed-forward 3DGS framework that
+constructs scene-adaptive Gaussian representations from sparse unposed images
+in a single forward pass.
+
+<br><br>
+
+ReCo-Splat introduces two complementary strategies:
+<b>Intra-View Gaussian Allocation</b>, which adaptively distributes Gaussian
+candidates according to local appearance and geometry complexity, and
+<b>Inter-View Gaussian Compaction</b>, which suppresses repeated surface
+explanations through redundancy-aware opacity competition.
+
+</p>
+
+</section>
+
+
+
+<section>
+
+<h2>
+Why Compact Feed-forward 3DGS?
+</h2>
+
+
+<p>
+
+Existing feed-forward Gaussian reconstruction methods often couple the number
+of primitives with input resolution and view count. However, increasing
+observations does not always introduce new scene information.
+
+ReCo-Splat analyzes redundancy from two perspectives:
+
+</p>
+
+
+<div class="cards">
+
+<div>
+<h3>
+Intra-view Over-allocation
+</h3>
+
+<p>
+Dense pixel-wise prediction assigns unnecessary Gaussians to simple regions.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+Inter-view Redundancy
+</h3>
+
+<p>
+Multiple views may repeatedly explain the same local surface.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+<img class="figure"
+src="assets/redundancy.png">
+
+
+</section>
+
+
+
+
+<section>
+
+
+<h2>
+Method Overview
+</h2>
+
+
+<img class="figure"
+src="assets/overview.png">
+
+
+<p>
+
+Given sparse unordered images, ReCo-Splat first extracts geometry-aware
+and appearance-aware features.
+
+The Gaussian head predicts dense Gaussian attributes, followed by:
+
+</p>
+
+
+<ul>
+
+<li>
+Complexity-guided quadtree Gaussian allocation
+</li>
+
+<li>
+Scale compensation for maintaining spatial coverage
+</li>
+
+<li>
+Cross-view opacity competition and pruning
+</li>
+
+</ul>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>
+Intra-View Gaussian Allocation
+</h2>
+
+
+<p>
+
+Gaussian primitives are allocated according to local RGB-depth complexity.
+Low-complexity regions receive fewer primitives, while boundaries and
+high-frequency regions preserve detailed representations.
+
+</p>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>
+Inter-View Gaussian Compaction
+</h2>
+
+
+<img class="figure"
+src="assets/redundancy.png">
+
+
+<p>
+
+Instead of directly merging Gaussians, ReCo-Splat encourages redundant
+surface explanations to compete for opacity during training.
+
+At inference time, low-opacity redundant Gaussians are removed.
+
+</p>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>
+Novel View Synthesis
+</h2>
+
+
+<img class="figure"
+src="assets/render.png">
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>
+Geometry Reconstruction
+</h2>
+
+
+<img class="figure"
+src="assets/depth.png">
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>
+Compactness and Scalability
+</h2>
+
+
+<div class="stats">
+
+
+<div>
+
+<h1>
+653k-982k
+</h1>
+
+<p>
+Active Gaussians
+</p>
+
+</div>
+
+
+<div>
+
+<h1>
+74%
+</h1>
+
+<p>
+Reduction compared with DA3/DGGT
+</p>
+
+</div>
+
+
+
+<div>
+
+<h1>
+70
+</h1>
+
+<p>
+Input images on RTX4090
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+<img class="figure"
+src="assets/efficiency.png">
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<h2>
+Ablation Study
+</h2>
+
+
+<img class="figure"
+src="assets/ablation.png">
+
+
+</section>
+
+
+
+
+<section>
+
+
+<h2>
+BibTeX</h2>
+
+
+<pre>
+
+@article{recosplat2026,
+title={ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting},
+author={Anonymous},
+journal={CVPR},
+year={2026}
+}
+
+</pre>
+
+
+</section>
+
+
+
+<footer>
+
+ReCo-Splat
+
+</footer>
+
+
+</body>
+
+
+</html>
