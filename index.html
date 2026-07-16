@@ -1,385 +1,404 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>ReCo-Splat</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting.">
+  <title>ReCo-Splat</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
-
 <body>
-
-
-<header>
-
-<h1>
-ReCo-Splat:
-<br>
-Redundancy-aware Compact Feed-forward Gaussian Splatting
-</h1>
-
-
-<p class="authors">
-Anonymous CVPR Submission
-</p>
-
-
-<div class="buttons">
-
-<a>Paper</a>
-<a>Code</a>
-<a>Dataset</a>
-
-</div>
-
-
-<img class="teaser"
-src="assets/teaser.png">
-
-
-</header>
-
-
-
-<section>
-
-<h2>Abstract</h2>
-
-<p>
-
-Feed-forward 3D Gaussian Splatting enables efficient scene reconstruction
-by directly predicting Gaussian representations from sparse input images.
-However, existing approaches generate primitives according to observation
-density rather than intrinsic scene complexity, resulting in redundant
-Gaussian representations.
-
-<br><br>
-
-We propose <b>ReCo-Splat</b>, a compact feed-forward 3DGS framework that
-constructs scene-adaptive Gaussian representations from sparse unposed images
-in a single forward pass.
-
-<br><br>
-
-ReCo-Splat introduces two complementary strategies:
-<b>Intra-View Gaussian Allocation</b>, which adaptively distributes Gaussian
-candidates according to local appearance and geometry complexity, and
-<b>Inter-View Gaussian Compaction</b>, which suppresses repeated surface
-explanations through redundancy-aware opacity competition.
-
-</p>
-
-</section>
-
-
-
-<section>
-
-<h2>
-Why Compact Feed-forward 3DGS?
-</h2>
-
-
-<p>
-
-Existing feed-forward Gaussian reconstruction methods often couple the number
-of primitives with input resolution and view count. However, increasing
-observations does not always introduce new scene information.
-
-ReCo-Splat analyzes redundancy from two perspectives:
-
-</p>
-
-
-<div class="cards">
-
-<div>
-<h3>
-Intra-view Over-allocation
-</h3>
-
-<p>
-Dense pixel-wise prediction assigns unnecessary Gaussians to simple regions.
-</p>
-
-</div>
-
-
-<div>
-
-<h3>
-Inter-view Redundancy
-</h3>
-
-<p>
-Multiple views may repeatedly explain the same local surface.
-</p>
-
-
-</div>
-
-
-</div>
-
-
-<img class="figure"
-src="assets/redundancy.png">
-
-
-</section>
-
-
-
-
-<section>
-
-
-<h2>
-Method Overview
-</h2>
-
-
-<img class="figure"
-src="assets/overview.png">
-
-
-<p>
-
-Given sparse unordered images, ReCo-Splat first extracts geometry-aware
-and appearance-aware features.
-
-The Gaussian head predicts dense Gaussian attributes, followed by:
-
-</p>
-
-
-<ul>
-
-<li>
-Complexity-guided quadtree Gaussian allocation
-</li>
-
-<li>
-Scale compensation for maintaining spatial coverage
-</li>
-
-<li>
-Cross-view opacity competition and pruning
-</li>
-
-</ul>
-
-
-</section>
-
-
-
-
-
-<section>
-
-
-<h2>
-Intra-View Gaussian Allocation
-</h2>
-
-
-<p>
-
-Gaussian primitives are allocated according to local RGB-depth complexity.
-Low-complexity regions receive fewer primitives, while boundaries and
-high-frequency regions preserve detailed representations.
-
-</p>
-
-
-</section>
-
-
-
-
-
-<section>
-
-
-<h2>
-Inter-View Gaussian Compaction
-</h2>
-
-
-<img class="figure"
-src="assets/redundancy.png">
-
-
-<p>
-
-Instead of directly merging Gaussians, ReCo-Splat encourages redundant
-surface explanations to compete for opacity during training.
-
-At inference time, low-opacity redundant Gaussians are removed.
-
-</p>
-
-
-</section>
-
-
-
-
-
-<section>
-
-
-<h2>
-Novel View Synthesis
-</h2>
-
-
-<img class="figure"
-src="assets/render.png">
-
-
-</section>
-
-
-
-
-
-<section>
-
-
-<h2>
-Geometry Reconstruction
-</h2>
-
-
-<img class="figure"
-src="assets/depth.png">
-
-
-</section>
-
-
-
-
-
-<section>
-
-
-<h2>
-Compactness and Scalability
-</h2>
-
-
-<div class="stats">
-
-
-<div>
-
-<h1>
-653k-982k
-</h1>
-
-<p>
-Active Gaussians
-</p>
-
-</div>
-
-
-<div>
-
-<h1>
-74%
-</h1>
-
-<p>
-Reduction compared with DA3/DGGT
-</p>
-
-</div>
-
-
-
-<div>
-
-<h1>
-70
-</h1>
-
-<p>
-Input images on RTX4090
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-<img class="figure"
-src="assets/efficiency.png">
-
-
-</section>
-
-
-
-
-
-
-<section>
-
-
-<h2>
-Ablation Study
-</h2>
-
-
-<img class="figure"
-src="assets/ablation.png">
-
-
-</section>
-
-
-
-
-<section>
-
-
-<h2>
-BibTeX</h2>
-
-
-<pre>
-
-@article{recosplat2026,
-title={ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting},
-author={Anonymous},
-journal={CVPR},
-year={2026}
-}
-
-</pre>
-
-
-</section>
-
-
-
-<footer>
-
-ReCo-Splat
-
-</footer>
-
-
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="hero">
+    <p class="eyebrow">Compact feed-forward 3D Gaussian Splatting</p>
+    <h1>
+      ReCo-Splat:
+      <span>Redundancy-aware Compact Feed-forward Gaussian Splatting</span>
+    </h1>
+
+    <p class="authors">Anonymous CVPR Submission</p>
+
+    <nav class="buttons" aria-label="Project links">
+      <a class="button is-disabled" aria-disabled="true">Paper</a>
+      <a class="button is-disabled" aria-disabled="true">Code</a>
+      <a class="button button-accent" href="#datasets">Datasets <span aria-hidden="true">↓</span></a>
+    </nav>
+
+    <img class="teaser" src="assets/teaser.png" alt="ReCo-Splat reconstruction and rendering overview">
+  </header>
+
+  <main id="main-content">
+    <section id="abstract">
+      <div class="section-heading">
+        <p class="section-kicker">Overview</p>
+        <h2>Abstract</h2>
+      </div>
+
+      <p class="lead-copy">
+        Feed-forward 3D Gaussian Splatting enables efficient scene reconstruction
+        by directly predicting Gaussian representations from sparse input images.
+        However, existing approaches generate primitives according to observation
+        density rather than intrinsic scene complexity, resulting in redundant
+        Gaussian representations.
+      </p>
+
+      <p>
+        We propose <strong>ReCo-Splat</strong>, a compact feed-forward 3DGS framework that
+        constructs scene-adaptive Gaussian representations from sparse unposed images
+        in a single forward pass. ReCo-Splat introduces two complementary strategies:
+        <strong>Intra-View Gaussian Allocation</strong>, which adaptively distributes Gaussian
+        candidates according to local appearance and geometry complexity, and
+        <strong>Inter-View Gaussian Compaction</strong>, which suppresses repeated surface
+        explanations through redundancy-aware opacity competition.
+      </p>
+    </section>
+
+    <section id="datasets" class="dataset-section">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="section-kicker">Paper resources</p>
+          <h2>Datasets</h2>
+        </div>
+        <p>Every dataset used for training or evaluation in the paper, linked to its authoritative source.</p>
+      </div>
+
+      <div class="dataset-toolbar">
+        <div class="dataset-filters" role="tablist" aria-label="Filter datasets">
+          <button class="filter-button is-active" type="button" role="tab" aria-selected="true" data-filter="all">All</button>
+          <button class="filter-button" type="button" role="tab" aria-selected="false" data-filter="training">Training</button>
+          <button class="filter-button" type="button" role="tab" aria-selected="false" data-filter="evaluation">Evaluation</button>
+        </div>
+        <p class="dataset-count" aria-live="polite"><span id="dataset-count">12</span> datasets</p>
+      </div>
+
+      <div class="dataset-grid" id="dataset-grid">
+        <a class="dataset-card" data-group="training" href="https://ai.meta.com/datasets/co3d-dataset/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">01</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>CO3Dv2</h3>
+          <p>Object-centric multi-view videos with camera and point-cloud annotations.</p>
+          <span class="dataset-link">Official dataset <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://wildrgbd.github.io/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">02</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>WildRGB-D</h3>
+          <p>Real-world RGB-D object videos captured across diverse environments.</p>
+          <span class="dataset-link">Official project <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://scannetpp.mlsg.cit.tum.de/scannetpp/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">03</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>ScanNet++</h3>
+          <p>High-fidelity indoor scenes with DSLR, RGB-D, and laser-scan data.</p>
+          <span class="dataset-link">Official dataset <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://midair.ulg.ac.be/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">04</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>Mid-Air</h3>
+          <p>Synthetic multi-modal data for low-altitude drone flights.</p>
+          <span class="dataset-link">Official dataset <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://github.com/apple/ml-hypersim" target="_blank" rel="noreferrer">
+          <span class="dataset-index">05</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>Hypersim</h3>
+          <p>Photorealistic synthetic indoor scenes with dense geometry labels.</p>
+          <span class="dataset-link">Official repository <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://city-super.github.io/matrixcity/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">06</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>MatrixCity</h3>
+          <p>Large-scale synthetic city data for neural rendering research.</p>
+          <span class="dataset-link">Official project <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="training" href="https://waymo.com/open/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">07</span>
+          <span class="dataset-badge training-badge">Training</span>
+          <h3>Waymo Open Dataset</h3>
+          <p>Large-scale multi-sensor data for autonomous driving research.</p>
+          <span class="dataset-link">Official dataset <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="evaluation" href="https://cvg.cit.tum.de/data/datasets/rgbd-dataset" target="_blank" rel="noreferrer">
+          <span class="dataset-index">08</span>
+          <span class="dataset-badge evaluation-badge">Evaluation</span>
+          <h3>TUM RGB-D</h3>
+          <p>RGB-D SLAM benchmark with synchronized color, depth, and trajectories.</p>
+          <span class="dataset-link">Official benchmark <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="evaluation" href="https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html" target="_blank" rel="noreferrer">
+          <span class="dataset-index">09</span>
+          <span class="dataset-badge evaluation-badge">Evaluation</span>
+          <h3>NYU Depth V2</h3>
+          <p>Indoor RGB-D video sequences with dense scene annotations.</p>
+          <span class="dataset-link">Official dataset <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="evaluation" href="https://jonbarron.info/mipnerf360/" target="_blank" rel="noreferrer">
+          <span class="dataset-index">10</span>
+          <span class="dataset-badge evaluation-badge">Evaluation</span>
+          <h3>mip-NeRF 360</h3>
+          <p>Unbounded indoor and outdoor scenes for novel-view synthesis.</p>
+          <span class="dataset-link">Official project <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="evaluation" href="https://github.com/junzhang2016/NTU4DRadLM" target="_blank" rel="noreferrer">
+          <span class="dataset-index">11</span>
+          <span class="dataset-badge evaluation-badge">Evaluation</span>
+          <h3>NTU4DRadLM</h3>
+          <p>4D radar-centric multi-modal sequences for localization and mapping.</p>
+          <span class="dataset-link">Official repository <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <a class="dataset-card" data-group="evaluation" href="https://arxiv.org/abs/2511.16091" target="_blank" rel="noreferrer">
+          <span class="dataset-index">12</span>
+          <span class="dataset-badge evaluation-badge">Evaluation</span>
+          <h3>RADGS</h3>
+          <p>Outdoor radar-camera evaluation sequence from the Rad-GS study.</p>
+          <span class="dataset-link">Authoritative source <span aria-hidden="true">↗</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-kicker">Motivation</p>
+        <h2>Why Compact Feed-forward 3DGS?</h2>
+      </div>
+
+      <p>
+        Existing feed-forward Gaussian reconstruction methods often couple the number
+        of primitives with input resolution and view count. However, increasing
+        observations does not always introduce new scene information. ReCo-Splat
+        analyzes redundancy from two perspectives:
+      </p>
+
+      <div class="cards">
+        <article>
+          <span class="card-number">01</span>
+          <h3>Intra-view Over-allocation</h3>
+          <p>Dense pixel-wise prediction assigns unnecessary Gaussians to simple regions.</p>
+        </article>
+        <article>
+          <span class="card-number">02</span>
+          <h3>Inter-view Redundancy</h3>
+          <p>Multiple views may repeatedly explain the same local surface.</p>
+        </article>
+      </div>
+
+      <img class="figure" src="assets/redundancy.png" alt="Intra-view and inter-view redundancy analysis">
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-kicker">Architecture</p>
+        <h2>Method Overview</h2>
+      </div>
+
+      <img class="figure" src="assets/overview.png" alt="ReCo-Splat method overview">
+      <p>
+        Given sparse unordered images, ReCo-Splat first extracts geometry-aware
+        and appearance-aware features. The Gaussian head predicts dense Gaussian
+        attributes, followed by:
+      </p>
+      <ul class="feature-list">
+        <li>Complexity-guided quadtree Gaussian allocation</li>
+        <li>Scale compensation for maintaining spatial coverage</li>
+        <li>Cross-view opacity competition and pruning</li>
+      </ul>
+    </section>
+
+    <section class="two-column-methods">
+      <article>
+        <p class="section-kicker">Module 01</p>
+        <h2>Intra-View Gaussian Allocation</h2>
+        <p>
+          Gaussian primitives are allocated according to local RGB-depth complexity.
+          Low-complexity regions receive fewer primitives, while boundaries and
+          high-frequency regions preserve detailed representations.
+        </p>
+      </article>
+
+      <article>
+        <p class="section-kicker">Module 02</p>
+        <h2>Inter-View Gaussian Compaction</h2>
+        <p>
+          Instead of directly merging Gaussians, ReCo-Splat encourages redundant
+          surface explanations to compete for opacity during training. At inference
+          time, low-opacity redundant Gaussians are removed.
+        </p>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-kicker">Rendering</p>
+        <h2>Novel View Synthesis</h2>
+      </div>
+      <img class="figure" src="assets/render.png" alt="Novel view synthesis comparison">
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-kicker">Geometry</p>
+        <h2>Geometry Reconstruction</h2>
+      </div>
+      <img class="figure" src="assets/depth.png" alt="Geometry reconstruction comparison">
+    </section>
+
+    <section id="efficiency" class="efficiency-section">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="section-kicker">Efficiency at 255 Kpixels</p>
+          <h2>Compactness &amp; Scalability</h2>
+        </div>
+        <p>Fewer Gaussians should not limit how many observations a model can process.</p>
+      </div>
+
+      <div class="metric-chips" aria-label="Efficiency experiment settings">
+        <span>255 Kpixels / image</span>
+        <span>Single RTX 4090</span>
+        <span>20-view benchmark mean for GS</span>
+      </div>
+
+      <div class="efficiency-summary" aria-live="polite">
+        <div>
+          <p class="summary-label">Selected method</p>
+          <h3 id="selected-method">ReCo-Splat</h3>
+        </div>
+        <div>
+          <span>Gaussian count</span>
+          <strong id="selected-gs">0.80M</strong>
+        </div>
+        <div>
+          <span>Max images</span>
+          <strong id="selected-max">70</strong>
+        </div>
+        <p id="selected-note">Fewest Gaussians and the highest input capacity in this comparison.</p>
+      </div>
+
+      <div class="chart-grid" id="efficiency-chart">
+        <article class="chart-panel" aria-labelledby="gs-chart-title">
+          <div class="chart-title-row">
+            <div>
+              <p class="chart-kicker">Representation size</p>
+              <h3 id="gs-chart-title">Gaussian count <span>↓</span></h3>
+            </div>
+            <p>Mean, millions</p>
+          </div>
+
+          <div class="bar-chart">
+            <button class="bar-row is-active" type="button" data-method="reco" aria-pressed="true">
+              <span class="method-name">ReCo-Splat</span>
+              <span class="bar-track"><span class="bar-fill reco-bar" style="--bar-size: 14.6%"></span></span>
+              <strong>0.80M</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="da3" aria-pressed="false">
+              <span class="method-name">DA3</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 56.1%"></span></span>
+              <strong>3.07M</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="dggt" aria-pressed="false">
+              <span class="method-name">DGGT</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 100%"></span></span>
+              <strong>5.47M</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="worldmirror" aria-pressed="false">
+              <span class="method-name">WorldMirror</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 43.5%"></span></span>
+              <strong>2.38M</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="anysplat" aria-pressed="false">
+              <span class="method-name">AnySplat</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 44.1%"></span></span>
+              <strong>2.41M</strong>
+            </button>
+          </div>
+        </article>
+
+        <article class="chart-panel max-image-panel" aria-labelledby="max-chart-title">
+          <div class="chart-title-row">
+            <div>
+              <p class="chart-kicker">GPU capacity</p>
+              <h3 id="max-chart-title">Max images <span>↑</span></h3>
+            </div>
+            <p>Images / GPU</p>
+          </div>
+
+          <div class="bar-chart">
+            <button class="bar-row is-active" type="button" data-method="reco" aria-pressed="true">
+              <span class="method-name">ReCo-Splat</span>
+              <span class="bar-track"><span class="bar-fill reco-bar" style="--bar-size: 100%"></span></span>
+              <strong>70</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="da3" aria-pressed="false">
+              <span class="method-name">DA3</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 80%"></span></span>
+              <strong>56</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="dggt" aria-pressed="false">
+              <span class="method-name">DGGT</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 17.1%"></span></span>
+              <strong>12</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="worldmirror" aria-pressed="false">
+              <span class="method-name">WorldMirror</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 57.1%"></span></span>
+              <strong>40</strong>
+            </button>
+            <button class="bar-row" type="button" data-method="anysplat" aria-pressed="false">
+              <span class="method-name">AnySplat</span>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 40%"></span></span>
+              <strong>28</strong>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <p class="chart-note">
+        Gaussian count is the mean final GS count across TUM, NYUv2, NTU4DRadLM, and RADGS in Table 2.
+        MaxImage is read at 255 Kpixels from Fig. 7; all capacity tests use one RTX 4090.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <p class="section-kicker">Analysis</p>
+        <h2>Ablation Study</h2>
+      </div>
+      <img class="figure" src="assets/ablation.png" alt="ReCo-Splat ablation study">
+    </section>
+
+    <section id="bibtex">
+      <div class="section-heading">
+        <p class="section-kicker">Citation</p>
+        <h2>BibTeX</h2>
+      </div>
+      <pre><code>@article{recosplat2026,
+  title={ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting},
+  author={Anonymous},
+  journal={CVPR},
+  year={2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>ReCo-Splat</p>
+    <a href="#main-content">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
 </body>
-
-
 </html>
