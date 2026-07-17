@@ -13,3 +13,13 @@
 - 2026-07-16: Verified the page in the in-app browser at 1280px and 390px; layouts are responsive with no horizontal overflow.
 - 2026-07-16: Verified dataset filters (7 training / 5 evaluation), chart synchronization, all image loads, and zero browser console warnings/errors.
 - 2026-07-16: `node --check script.js` and `git diff --check` both passed.
+- 2026-07-17: Started the qualitative-results extension using `gaussian_ply`, `gaussian_contrast`, `gaussian_render`, and the supplied paper PDF.
+- 2026-07-17: Confirmed the existing static project page and previous dataset/efficiency interactions are the base to preserve.
+- 2026-07-17: Audited all video/image dimensions, durations, codecs, preview images, and exact pairing keys.
+- 2026-07-17: Extracted the authoritative Table 3 values and Figure 4 caption from the PDF.
+- 2026-07-17: Extracted the native Figure 4 image as `assets/overlap_redundancy.png` and visually verified it.
+- 2026-07-17: Implemented data-driven scene selectors, synchronized video timelines, two draggable image comparisons, the overlap/redundancy figure, and the full HTML Table 3 ablation.
+- 2026-07-17: Added web-compatible H.264 derivatives for the eight MPEG-4 novel-view videos while preserving the supplied originals.
+- 2026-07-17: Harmonized image/video proportions, module typography, captions, controls, radii, and mobile spacing into one visual scale.
+- 2026-07-17: Validation passed for JavaScript syntax, CSS parsing, HTML structure/local assets, all 16 dynamic media references, video codecs/durations, four exact render/Gaussian pairs, compatible spatial-image ratios, Table 3's 12 source rows, and whitespace errors.
+- 2026-07-17: Removed the temporary rendered PDF page; only the native extracted Figure 4 asset remains.

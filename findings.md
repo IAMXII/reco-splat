@@ -38,3 +38,19 @@
 - Browser verification passed at 1280px desktop and 390px mobile widths with no horizontal overflow.
 - Training and evaluation filters returned the expected 7 and 5 cards; synchronized chart selection returned two active rows and the correct shared values.
 - All six page images loaded with non-zero natural dimensions, and browser console checks returned no warnings or errors.
+
+## 2026-07-17 qualitative-results extension
+- New source folders are currently untracked and must be preserved as user-provided assets: `gaussian_ply/`, `gaussian_contrast/`, `gaussian_render/`, and `nvs_video/`.
+- Requested deliverables: extensible dataset-based method videos; draggable Gaussian spatial-distribution comparison; draggable render/Gaussian comparison; HTML ablation table; paper overlap/redundancy figure.
+- `gaussian_ply/family_short.png` is the current dataset selector preview. The three Family videos are DA3, WorldMirror, and ReCo-Splat.
+- `gaussian_contrast/` currently contains DA3, WorldMirror, ReCo-Splat, and ground-truth/reference images.
+- `gaussian_render/` currently contains four render/Gaussian image pairs keyed by frame id.
+- `nvs_video/` contains four 8-second render/depth video pairs (Auditorium, Family, Real, Real 1), each with a `short.jpg` preview. The user's `short.jpg` instruction therefore makes this folder part of the qualitative selector UI even though it was not separately named in the prose request.
+- Family method-comparison videos are aligned 6-second, 30 fps, 3840x2160 H.264 clips for DA3, WorldMirror, and ReCo-Splat.
+- The spatial comparison should expose DA3, WorldMirror, and the RGB reference as selectable left-side sources against ReCo-Splat on the right.
+- The render/Gaussian pairs are all 672x378 and can be matched exactly by frame ids 0035, 0053, 0083, and 0124.
+- Paper Table 3 is the requested ablation table. It contains four ablations/variants over Real, CP, and Valley with PSNR, SSIM, LPIPS, and active GS count.
+- Paper Figure 4 is titled "Visualization of overlap redundancy and opacity compression." Its native embedded image was extracted to `assets/overlap_redundancy.png` at 1865x889; red regions indicate projected 3D areas with redundant multi-view Gaussians.
+- The final qualitative UI uses four data-driven ReCo-Splat render/depth scenes, one extensible three-method Gaussian video dataset, three selectable spatial-comparison sources, and four render/Gaussian frame pairs.
+- Supplied NVS clips used MPEG-4 Part 2, so H.264/yuv420p `*_web.mp4` derivatives were created for browser compatibility; originals remain untouched.
+- Media and typography now share a consistent scale: native media aspect ratios, 18px media radii, 0.74-0.88rem media/caption text, and 1.45-2.05rem module headings with mobile overrides.

@@ -24,7 +24,8 @@
     <nav class="buttons" aria-label="Project links">
       <a class="button is-disabled" aria-disabled="true">Paper</a>
       <a class="button is-disabled" aria-disabled="true">Code</a>
-      <a class="button button-accent" href="#datasets">Datasets <span aria-hidden="true">↓</span></a>
+      <a class="button" href="#datasets">Datasets</a>
+      <a class="button button-accent" href="#qualitative">Results <span aria-hidden="true">↓</span></a>
     </nav>
 
     <img class="teaser" src="assets/teaser.png" alt="ReCo-Splat reconstruction and rendering overview">
@@ -221,34 +222,161 @@
       </ul>
     </section>
 
-    <section class="two-column-methods">
-      <article>
-        <p class="section-kicker">Module 01</p>
-        <h2>Intra-View Gaussian Allocation</h2>
-        <p>
-          Gaussian primitives are allocated according to local RGB-depth complexity.
-          Low-complexity regions receive fewer primitives, while boundaries and
-          high-frequency regions preserve detailed representations.
-        </p>
-      </article>
+    <section class="method-details">
+      <div class="two-column-methods">
+        <article>
+          <p class="section-kicker">Module 01</p>
+          <h2>Intra-View Gaussian Allocation</h2>
+          <p>
+            Gaussian primitives are allocated according to local RGB-depth complexity.
+            Low-complexity regions receive fewer primitives, while boundaries and
+            high-frequency regions preserve detailed representations.
+          </p>
+        </article>
 
-      <article>
-        <p class="section-kicker">Module 02</p>
-        <h2>Inter-View Gaussian Compaction</h2>
-        <p>
-          Instead of directly merging Gaussians, ReCo-Splat encourages redundant
-          surface explanations to compete for opacity during training. At inference
-          time, low-opacity redundant Gaussians are removed.
-        </p>
-      </article>
+        <article>
+          <p class="section-kicker">Module 02</p>
+          <h2>Inter-View Gaussian Compaction</h2>
+          <p>
+            Instead of directly merging Gaussians, ReCo-Splat encourages redundant
+            surface explanations to compete for opacity during training. At inference
+            time, low-opacity redundant Gaussians are removed.
+          </p>
+        </article>
+      </div>
+
+      <figure class="paper-figure overlap-figure">
+        <img src="assets/overlap_redundancy.png" alt="Red overlays show multi-view regions with redundant Gaussian coverage before opacity compression">
+        <figcaption>
+          <span>Overlap redundancy</span>
+          Red regions denote 2D projections of 3D areas where multi-view synthesis
+          generates redundant Gaussians. ReCo-Splat learns to compress their opacity
+          before hard pruning at inference.
+        </figcaption>
+      </figure>
     </section>
 
-    <section>
-      <div class="section-heading">
-        <p class="section-kicker">Rendering</p>
-        <h2>Novel View Synthesis</h2>
+    <section id="qualitative" class="qualitative-section">
+      <div class="section-heading split-heading">
+        <div>
+          <p class="section-kicker">Interactive results</p>
+          <h2>Explore the Reconstruction</h2>
+        </div>
+        <p>Select a scene, play synchronized comparisons, and drag directly across each image to inspect the Gaussian representation.</p>
       </div>
-      <img class="figure" src="assets/render.png" alt="Novel view synthesis comparison">
+
+      <article class="result-module nvs-module" aria-labelledby="nvs-title">
+        <div class="result-module-heading">
+          <div>
+            <p class="module-index">01 / Novel-view synthesis</p>
+            <h3 id="nvs-title">Rendered appearance &amp; geometry</h3>
+          </div>
+          <p>Choose a scene using its preview. Both videos share one timeline for direct inspection.</p>
+        </div>
+
+        <div class="scene-picker" id="nvs-scene-picker" role="tablist" aria-label="Choose a novel-view scene"></div>
+
+        <div class="video-comparison" id="nvs-video-comparison" data-video-group>
+          <div class="video-grid two-up" id="nvs-video-grid"></div>
+          <div class="video-toolbar">
+            <button class="video-toggle" type="button" data-video-toggle aria-label="Play synchronized scene videos">
+              <span aria-hidden="true">▶</span>
+              <span data-video-toggle-label>Play</span>
+            </button>
+            <input class="video-scrubber" data-video-scrubber type="range" min="0" max="1000" value="0" aria-label="Scene video timeline">
+            <span class="video-time" data-video-time>0:00 / 0:08</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="result-module method-video-module" aria-labelledby="method-video-title">
+        <div class="result-module-heading">
+          <div>
+            <p class="module-index">02 / Method comparison</p>
+            <h3 id="method-video-title">Gaussian distributions in motion</h3>
+          </div>
+          <p>DA3, WorldMirror, and ReCo-Splat follow the same Family trajectory for a synchronized spatial comparison.</p>
+        </div>
+
+        <div class="scene-picker compact-picker" id="gaussian-video-dataset-picker" role="tablist" aria-label="Choose a Gaussian video dataset"></div>
+
+        <div class="video-comparison" id="gaussian-video-comparison" data-video-group>
+          <div class="video-grid three-up" id="gaussian-video-grid"></div>
+          <div class="video-toolbar">
+            <button class="video-toggle" type="button" data-video-toggle aria-label="Play synchronized method videos">
+              <span aria-hidden="true">▶</span>
+              <span data-video-toggle-label>Play</span>
+            </button>
+            <input class="video-scrubber" data-video-scrubber type="range" min="0" max="1000" value="0" aria-label="Method comparison timeline">
+            <span class="video-time" data-video-time>0:00 / 0:06</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="result-module" aria-labelledby="spatial-title">
+        <div class="result-module-heading">
+          <div>
+            <p class="module-index">03 / Spatial distribution</p>
+            <h3 id="spatial-title">Where each method spends Gaussians</h3>
+          </div>
+          <p>Select a reference on the left, then drag the center divider to compare it with ReCo-Splat.</p>
+        </div>
+
+        <div class="comparison-layout">
+          <div class="comparison-options" role="tablist" aria-label="Choose the left spatial comparison">
+            <button class="comparison-option is-active" type="button" role="tab" aria-selected="true" data-spatial-source="gaussian_contrast/wm.png" data-spatial-label="WorldMirror">WorldMirror</button>
+            <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/da3.png" data-spatial-label="DA3">DA3</button>
+            <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/gt.png" data-spatial-label="RGB reference">RGB reference</button>
+          </div>
+
+          <div class="comparison-stage" data-image-compare style="--split: 50%">
+            <img class="comparison-base" src="gaussian_contrast/ours.png" alt="ReCo-Splat Gaussian spatial distribution">
+            <img class="comparison-overlay" data-comparison-overlay src="gaussian_contrast/wm.png" alt="WorldMirror Gaussian spatial distribution">
+            <span class="comparison-label comparison-label-left" data-comparison-left-label>WorldMirror</span>
+            <span class="comparison-label comparison-label-right">ReCo-Splat</span>
+            <span class="comparison-divider" aria-hidden="true"><span>↔</span></span>
+            <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal ReCo-Splat spatial distribution" aria-valuetext="50 percent WorldMirror and 50 percent ReCo-Splat">
+          </div>
+        </div>
+      </article>
+
+      <article class="result-module" aria-labelledby="render-gaussian-title">
+        <div class="result-module-heading">
+          <div>
+            <p class="module-index">04 / Representation</p>
+            <h3 id="render-gaussian-title">Rendered view vs. Gaussian map</h3>
+          </div>
+          <p>Pick a camera frame and drag between ReCo-Splat's rendered output and its underlying ellipsoid distribution.</p>
+        </div>
+
+        <div class="frame-picker" role="tablist" aria-label="Choose a render and Gaussian frame">
+          <button class="frame-option is-active" type="button" role="tab" aria-selected="true" data-frame="0053" data-render="gaussian_render/render_0053.png" data-gaussian="gaussian_render/ellipsoid_0003_frame_0053.png">
+            <img src="gaussian_render/render_0053.png" alt="Frame 0053 preview">
+            <span>Frame 0053</span>
+          </button>
+          <button class="frame-option" type="button" role="tab" aria-selected="false" data-frame="0035" data-render="gaussian_render/render_0035.png" data-gaussian="gaussian_render/ellipsoid_0005_frame_0035.png">
+            <img src="gaussian_render/render_0035.png" alt="Frame 0035 preview">
+            <span>Frame 0035</span>
+          </button>
+          <button class="frame-option" type="button" role="tab" aria-selected="false" data-frame="0083" data-render="gaussian_render/render_0083.png" data-gaussian="gaussian_render/ellipsoid_0010_frame_0083.png">
+            <img src="gaussian_render/render_0083.png" alt="Frame 0083 preview">
+            <span>Frame 0083</span>
+          </button>
+          <button class="frame-option" type="button" role="tab" aria-selected="false" data-frame="0124" data-render="gaussian_render/render_0124.png" data-gaussian="gaussian_render/ellipsoid_0009_frame_0124.png">
+            <img src="gaussian_render/render_0124.png" alt="Frame 0124 preview">
+            <span>Frame 0124</span>
+          </button>
+        </div>
+
+        <div class="comparison-stage render-comparison" data-image-compare style="--split: 50%">
+          <img class="comparison-base" data-render-base src="gaussian_render/ellipsoid_0003_frame_0053.png" alt="ReCo-Splat Gaussian ellipsoid distribution for frame 0053">
+          <img class="comparison-overlay" data-render-overlay src="gaussian_render/render_0053.png" alt="ReCo-Splat rendered output for frame 0053">
+          <span class="comparison-label comparison-label-left">Rendered RGB</span>
+          <span class="comparison-label comparison-label-right">Gaussian distribution</span>
+          <span class="comparison-divider" aria-hidden="true"><span>↔</span></span>
+          <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal Gaussian representation" aria-valuetext="50 percent rendered RGB and 50 percent Gaussian distribution">
+        </div>
+      </article>
     </section>
 
     <section>
@@ -374,12 +502,60 @@
       </p>
     </section>
 
-    <section>
+    <section class="ablation-section">
       <div class="section-heading">
         <p class="section-kicker">Analysis</p>
         <h2>Ablation Study</h2>
       </div>
-      <img class="figure" src="assets/ablation.png" alt="ReCo-Splat ablation study">
+
+      <p class="lead-copy ablation-intro">
+        Intra-view allocation preserves detail while avoiding dense prediction;
+        inter-view compaction removes repeated surface explanations with little or no
+        rendering-quality loss.
+      </p>
+
+      <div class="table-shell" tabindex="0" role="region" aria-label="Ablation study table. Scroll horizontally on small screens.">
+        <table class="ablation-table">
+          <caption>Rendering quality and active Gaussian count across three evaluation scenes.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Dataset</th>
+              <th scope="col">Ablation</th>
+              <th scope="col">PSNR <span aria-label="higher is better">↑</span></th>
+              <th scope="col">SSIM <span aria-label="higher is better">↑</span></th>
+              <th scope="col">LPIPS <span aria-label="lower is better">↓</span></th>
+              <th scope="col">GS <span aria-label="lower is better">↓</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="rowgroup" rowspan="4">Real</th>
+              <td>Dense Gaussian Output</td><td>21.1898</td><td class="best">0.7649</td><td class="best">0.1727</td><td>4,580k</td>
+            </tr>
+            <tr><td>w/o Intra-View Allocation</td><td>19.2929</td><td>0.7138</td><td>0.2307</td><td>1,145k</td></tr>
+            <tr><td>w/o Inter-View Compaction</td><td>21.2285</td><td>0.7501</td><td>0.1896</td><td>961k</td></tr>
+            <tr class="ours-row"><td>Ours</td><td class="best">21.2616</td><td class="best">0.7649</td><td>0.1897</td><td class="best">650k</td></tr>
+
+            <tr>
+              <th scope="rowgroup" rowspan="4">CP</th>
+              <td>Dense Gaussian Output</td><td>22.3618</td><td>0.7095</td><td class="best">0.2440</td><td>7,269k</td>
+            </tr>
+            <tr><td>w/o Intra-View Allocation</td><td>20.9746</td><td>0.6669</td><td>0.2631</td><td>1,623k</td></tr>
+            <tr><td>w/o Inter-View Compaction</td><td class="second">22.9125</td><td class="best">0.7294</td><td>0.2845</td><td>1,456k</td></tr>
+            <tr class="ours-row"><td>Ours</td><td class="best">23.0314</td><td>0.7250</td><td>0.2879</td><td class="best">1,045k</td></tr>
+
+            <tr>
+              <th scope="rowgroup" rowspan="4">Valley</th>
+              <td>Dense Gaussian Output</td><td class="second">24.7932</td><td class="second">0.6531</td><td>0.2681</td><td>2,002k</td>
+            </tr>
+            <tr><td>w/o Intra-View Allocation</td><td>24.4390</td><td>0.6351</td><td class="second">0.2643</td><td class="second">1,355k</td></tr>
+            <tr><td>w/o Inter-View Compaction</td><td>24.4308</td><td>0.6451</td><td class="best">0.2627</td><td>1,608k</td></tr>
+            <tr class="ours-row"><td>Ours</td><td class="best">24.8038</td><td class="best">0.6532</td><td>0.2687</td><td class="best">1,242k</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="table-note"><strong>Bold</strong> marks the best value; <span>underlined</span> marks the second-best value, following Table 3 in the paper.</p>
     </section>
 
     <section id="bibtex">
