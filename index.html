@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting.">
   <title>ReCo-Splat</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20260718">
+  <script src="script.js?v=20260718" defer></script>
 </head>
 
 <body>
@@ -245,15 +245,6 @@
         </article>
       </div>
 
-      <figure class="paper-figure overlap-figure">
-        <img src="assets/overlap_redundancy.png" alt="Red overlays show multi-view regions with redundant Gaussian coverage before opacity compression">
-        <figcaption>
-          <span>Overlap redundancy</span>
-          Red regions denote 2D projections of 3D areas where multi-view synthesis
-          generates redundant Gaussians. ReCo-Splat learns to compress their opacity
-          before hard pruning at inference.
-        </figcaption>
-      </figure>
     </section>
 
     <section id="qualitative" class="qualitative-section">
@@ -313,7 +304,7 @@
         </div>
       </article>
 
-      <article class="result-module" aria-labelledby="spatial-title">
+      <article class="result-module spatial-module" aria-labelledby="spatial-title">
         <div class="result-module-heading">
           <div>
             <p class="module-index">03 / Spatial distribution</p>
@@ -322,25 +313,43 @@
           <p>Select a reference on the left, then drag the center divider to compare it with ReCo-Splat.</p>
         </div>
 
-        <div class="comparison-layout">
-          <div class="comparison-options" role="tablist" aria-label="Choose the left spatial comparison">
-            <button class="comparison-option is-active" type="button" role="tab" aria-selected="true" data-spatial-source="gaussian_contrast/wm.png" data-spatial-label="WorldMirror">WorldMirror</button>
-            <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/da3.png" data-spatial-label="DA3">DA3</button>
-            <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/gt.png" data-spatial-label="RGB reference">RGB reference</button>
+        <div class="analysis-pair">
+          <div class="spatial-comparison-panel">
+            <p class="analysis-panel-label"><span>Intra-view</span> Gaussian allocation</p>
+            <div class="comparison-layout">
+              <div class="comparison-options" role="tablist" aria-label="Choose the left spatial comparison">
+                <button class="comparison-option is-active" type="button" role="tab" aria-selected="true" data-spatial-source="gaussian_contrast/web/wm.png" data-spatial-label="WorldMirror">WorldMirror</button>
+                <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/web/da3.png" data-spatial-label="DA3">DA3</button>
+                <button class="comparison-option" type="button" role="tab" aria-selected="false" data-spatial-source="gaussian_contrast/web/gt.png" data-spatial-label="RGB reference">RGB reference</button>
+              </div>
+
+              <div class="comparison-stage" data-image-compare style="--split: 50%">
+                <img class="comparison-base" src="gaussian_contrast/web/ours.png" alt="ReCo-Splat Gaussian spatial distribution">
+                <div class="comparison-overlay" aria-hidden="true">
+                  <img data-comparison-overlay src="gaussian_contrast/web/wm.png" alt="">
+                </div>
+                <span class="comparison-label comparison-label-left" data-comparison-left-label>WorldMirror</span>
+                <span class="comparison-label comparison-label-right">ReCo-Splat</span>
+                <span class="comparison-divider" aria-hidden="true"><span>↔</span></span>
+                <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal ReCo-Splat spatial distribution" aria-valuetext="50 percent WorldMirror and 50 percent ReCo-Splat">
+              </div>
+            </div>
           </div>
 
-          <div class="comparison-stage" data-image-compare style="--split: 50%">
-            <img class="comparison-base" src="gaussian_contrast/ours.png" alt="ReCo-Splat Gaussian spatial distribution">
-            <img class="comparison-overlay" data-comparison-overlay src="gaussian_contrast/wm.png" alt="WorldMirror Gaussian spatial distribution">
-            <span class="comparison-label comparison-label-left" data-comparison-left-label>WorldMirror</span>
-            <span class="comparison-label comparison-label-right">ReCo-Splat</span>
-            <span class="comparison-divider" aria-hidden="true"><span>↔</span></span>
-            <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal ReCo-Splat spatial distribution" aria-valuetext="50 percent WorldMirror and 50 percent ReCo-Splat">
+          <div class="overlap-panel">
+            <p class="analysis-panel-label"><span>Inter-view</span> Overlap redundancy</p>
+            <figure class="paper-figure overlap-figure">
+              <img src="assets/overlap_redundancy.png" alt="Red overlays show multi-view regions with redundant Gaussian coverage before opacity compression">
+              <figcaption>
+                Red regions mark projected 3D areas where multi-view synthesis generates
+                redundant Gaussians before opacity compression.
+              </figcaption>
+            </figure>
           </div>
         </div>
       </article>
 
-      <article class="result-module" aria-labelledby="render-gaussian-title">
+      <article class="result-module representation-module" aria-labelledby="render-gaussian-title">
         <div class="result-module-heading">
           <div>
             <p class="module-index">04 / Representation</p>
@@ -349,6 +358,7 @@
           <p>Pick a camera frame and drag between ReCo-Splat's rendered output and its underlying ellipsoid distribution.</p>
         </div>
 
+        <div class="render-showcase">
         <div class="frame-picker" role="tablist" aria-label="Choose a render and Gaussian frame">
           <button class="frame-option is-active" type="button" role="tab" aria-selected="true" data-frame="0053" data-render="gaussian_render/render_0053.png" data-gaussian="gaussian_render/ellipsoid_0003_frame_0053.png">
             <img src="gaussian_render/render_0053.png" alt="Frame 0053 preview">
@@ -370,11 +380,14 @@
 
         <div class="comparison-stage render-comparison" data-image-compare style="--split: 50%">
           <img class="comparison-base" data-render-base src="gaussian_render/ellipsoid_0003_frame_0053.png" alt="ReCo-Splat Gaussian ellipsoid distribution for frame 0053">
-          <img class="comparison-overlay" data-render-overlay src="gaussian_render/render_0053.png" alt="ReCo-Splat rendered output for frame 0053">
+          <div class="comparison-overlay" aria-hidden="true">
+            <img data-render-overlay src="gaussian_render/render_0053.png" alt="">
+          </div>
           <span class="comparison-label comparison-label-left">Rendered RGB</span>
           <span class="comparison-label comparison-label-right">Gaussian distribution</span>
           <span class="comparison-divider" aria-hidden="true"><span>↔</span></span>
           <input class="comparison-range" type="range" min="0" max="100" value="50" aria-label="Reveal Gaussian representation" aria-valuetext="50 percent rendered RGB and 50 percent Gaussian distribution">
+        </div>
         </div>
       </article>
     </section>

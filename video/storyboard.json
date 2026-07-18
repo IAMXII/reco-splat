@@ -1,0 +1,171 @@
+[
+  {
+    "id": "01_intro",
+    "duration": 8.0,
+    "title": "ReCo-Splat",
+    "kind": "image",
+    "asset": "assets/teaser.png",
+    "narration": "ReCo-Splat reconstructs compact and expressive three-dimensional Gaussian maps from sparse, unposed images in a single forward pass."
+  },
+  {
+    "id": "02_redundancy",
+    "duration": 6.0,
+    "title": "Why compactness matters",
+    "kind": "image",
+    "asset": "assets/redundancy.png",
+    "narration": "As more views are added, rendering quality saturates, while the number of predicted Gaussians continues to grow."
+  },
+  {
+    "id": "03_overlap",
+    "duration": 6.0,
+    "title": "Inter-view overlap redundancy",
+    "kind": "image",
+    "asset": "assets/overlap_redundancy.png",
+    "narration": "Red regions identify surfaces repeatedly explained by multiple views, which are the targets of inter-view compaction."
+  },
+  {
+    "id": "04_method",
+    "duration": 12.0,
+    "title": "Scene-adaptive Gaussian allocation",
+    "kind": "image",
+    "asset": "assets/overview.png",
+    "narration": "The model fuses geometry and appearance features, allocates primitives according to local complexity, and compresses cross-view redundancy through opacity competition."
+  },
+  {
+    "id": "05_rendering",
+    "duration": 6.0,
+    "title": "Novel-view synthesis",
+    "kind": "image",
+    "asset": "assets/render.png",
+    "narration": "A compact representation still preserves stable textures, thin structures, and high-frequency details in novel views."
+  },
+  {
+    "id": "06_geometry",
+    "duration": 6.0,
+    "title": "Geometry reconstruction",
+    "kind": "image",
+    "asset": "assets/depth.png",
+    "narration": "Depth reconstruction retains sharper boundaries and produces more continuous local surfaces across challenging scenes."
+  },
+  {
+    "id": "07_nvs_auditorium",
+    "duration": 4.0,
+    "title": "NVS - Auditorium",
+    "kind": "video_pair",
+    "left": "nvs_video/auditorium_videos/render_web.mp4",
+    "right": "nvs_video/auditorium_videos/depth_web.mp4",
+    "narration": "The auditorium sequence pairs the rendered view with predicted depth."
+  },
+  {
+    "id": "08_nvs_family",
+    "duration": 4.0,
+    "title": "NVS - Family",
+    "kind": "video_pair",
+    "left": "nvs_video/family_videos/render_web.mp4",
+    "right": "nvs_video/family_videos/depth_web.mp4",
+    "narration": "The Family scene preserves the sculpture and its surrounding context."
+  },
+  {
+    "id": "09_nvs_real",
+    "duration": 4.0,
+    "title": "NVS - Real outdoor scene",
+    "kind": "video_pair",
+    "left": "nvs_video/real_videos/render_web.mp4",
+    "right": "nvs_video/real_videos/depth_web.mp4",
+    "narration": "This outdoor sequence demonstrates stability in a cluttered real environment."
+  },
+  {
+    "id": "10_nvs_real2",
+    "duration": 4.0,
+    "title": "NVS - Real indoor scene",
+    "kind": "video_pair",
+    "left": "nvs_video/real1_videos/render_web.mp4",
+    "right": "nvs_video/real1_videos/depth_web.mp4",
+    "narration": "A second real sequence covers a larger indoor structure."
+  },
+  {
+    "id": "11_gaussian_motion",
+    "duration": 12.0,
+    "title": "Gaussian distributions in motion",
+    "kind": "video_triple",
+    "assets": [
+      "gaussian_ply/family_da3.mp4",
+      "gaussian_ply/family_wm.mp4",
+      "gaussian_ply/family_ours.mp4"
+    ],
+    "narration": "Along the same camera trajectory, DA3 and WorldMirror produce denser or less balanced distributions, while ReCo-Splat remains compact and follows the scene surfaces."
+  },
+  {
+    "id": "12_intraview",
+    "duration": 12.0,
+    "title": "Intra-view Gaussian allocation",
+    "kind": "image_grid",
+    "assets": [
+      "gaussian_contrast/web/gt.png",
+      "gaussian_contrast/web/da3.png",
+      "gaussian_contrast/web/wm.png",
+      "gaussian_contrast/web/ours.png"
+    ],
+    "narration": "Comparing the RGB reference, DA3, WorldMirror, and our result shows that the Gaussian budget is concentrated where appearance and geometry require more detail."
+  },
+  {
+    "id": "13_frame_0053",
+    "duration": 3.5,
+    "title": "Render vs. Gaussian - Frame 0053",
+    "kind": "image_pair",
+    "left": "gaussian_render/render_0053.png",
+    "right": "gaussian_render/ellipsoid_0003_frame_0053.png",
+    "narration": "The first frame reveals the Gaussian structure around the sculpture."
+  },
+  {
+    "id": "14_frame_0035",
+    "duration": 3.5,
+    "title": "Render vs. Gaussian - Frame 0035",
+    "kind": "image_pair",
+    "left": "gaussian_render/render_0035.png",
+    "right": "gaussian_render/ellipsoid_0005_frame_0035.png",
+    "narration": "The second frame preserves detailed indoor coverage."
+  },
+  {
+    "id": "15_frame_0083",
+    "duration": 3.5,
+    "title": "Render vs. Gaussian - Frame 0083",
+    "kind": "image_pair",
+    "left": "gaussian_render/render_0083.png",
+    "right": "gaussian_render/ellipsoid_0010_frame_0083.png",
+    "narration": "The third frame contains complex textures and boundaries."
+  },
+  {
+    "id": "16_frame_0124",
+    "duration": 3.5,
+    "title": "Render vs. Gaussian - Frame 0124",
+    "kind": "image_pair",
+    "left": "gaussian_render/render_0124.png",
+    "right": "gaussian_render/ellipsoid_0009_frame_0124.png",
+    "narration": "The fourth frame demonstrates compact coverage in a larger room."
+  },
+  {
+    "id": "17_efficiency",
+    "duration": 7.0,
+    "title": "Compactness at 255 Kpixels",
+    "kind": "image",
+    "asset": "assets/efficiency.png",
+    "narration": "At two hundred fifty-five K pixels, ReCo-Splat uses about zero point eight million Gaussians and supports up to seventy input images."
+  },
+  {
+    "id": "18_ablation",
+    "duration": 7.0,
+    "title": "Ablation study",
+    "kind": "image",
+    "asset": "assets/ablation.png",
+    "narration": "Ablations confirm that intra-view allocation and inter-view compaction jointly reduce active Gaussians while preserving rendering quality."
+  },
+  {
+    "id": "19_outro",
+    "duration": 8.0,
+    "title": "Compact, scalable, and expressive",
+    "kind": "image",
+    "asset": "assets/teaser.png",
+    "narration": "ReCo-Splat delivers strong capacity, stable geometry, and high-quality novel-view synthesis with significantly fewer Gaussian primitives."
+  }
+]

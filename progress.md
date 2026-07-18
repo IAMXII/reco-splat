@@ -23,3 +23,16 @@
 - 2026-07-17: Harmonized image/video proportions, module typography, captions, controls, radii, and mobile spacing into one visual scale.
 - 2026-07-17: Validation passed for JavaScript syntax, CSS parsing, HTML structure/local assets, all 16 dynamic media references, video codecs/durations, four exact render/Gaussian pairs, compatible spatial-image ratios, Table 3's 12 source rows, and whitespace errors.
 - 2026-07-17: Removed the temporary rendered PDF page; only the native extracted Figure 4 asset remains.
+- 2026-07-18: Began page repair and 120-second narrated demo-video production from the user's screenshots and all supplied media.
+- 2026-07-18: Started a local preview server for browser reproduction after the sandboxed bind was denied.
+- 2026-07-18: Reproduced WorldMirror and RGB-reference states in the browser; both images and ReCo-Splat loaded, ruling out size mismatch as the root cause.
+- 2026-07-18: Added normalized web derivatives, hardened the comparison layering, paired overlap/redundancy with Gaussian contrast, and reduced the render viewer width.
+- 2026-07-18: Added CSS/JS cache-busting and browser-verified the two-column analysis, compact 800px render viewer, and RGB/ReCo-Splat comparison with both images loaded.
+- 2026-07-18: Corrected the analysis order to intra-view Gaussian contrast on the left and inter-view overlap redundancy on the right.
+- 2026-07-18: Updated the video specification to English synthetic narration and English burned-in/sidecar subtitles.
+- 2026-07-18: Browser-verified the final semantic layout: intra-view Gaussian contrast is left, inter-view overlap redundancy is right, and the render viewer is 800px wide.
+- 2026-07-18: Completed a 19-scene English storyboard using every supplied media group; asset validation passed and the exact runtime is 120 seconds.
+- 2026-07-18: Completed the first MP4 encode; stream and audio checks passed, then visual QA identified oversized burned-in subtitles on the chart scenes.
+- 2026-07-18: Reduced subtitle scale and re-encoded the delivery MP4; keyframe QA confirmed readable overlap, render/Gaussian, efficiency, and ablation scenes.
+- 2026-07-18: Final validation passed at exactly 120.000 seconds, 1920x1080, 30 fps, H.264 video, stereo AAC audio, 19 burned-in English subtitle cues, and non-silent normalized narration.
+- 2026-07-18: Removed the 92 MB intermediate render workspace and stopped the temporary local preview server.
