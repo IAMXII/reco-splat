@@ -45,38 +45,50 @@ filterButtons.forEach((button, index) => {
   });
 });
 
+// Final Gaussian counts (thousands), in TUM / NYUv2 / NTU / RADGS order.
+// Source: the updated paper's tables/geometry_contrast.tex (Table 2).
+// Capacity values are the 255 Kpixel measurements in Figure 7.
 const methodData = {
   reco: {
     label: "ReCo-Splat",
-    gs: "0.80M",
+    gaussianCountsK: [982, 653, 768, 795],
     maxImages: "70",
     note: "Fewest Gaussians and the highest input capacity in this comparison.",
   },
   da3: {
     label: "DA3",
-    gs: "3.07M",
+    gaussianCountsK: [4385, 4410, 4403, 4487],
     maxImages: "56",
-    note: "Processes 56 images while producing about 3.8× as many Gaussians as ReCo-Splat.",
+    note: "Processes 56 images while producing about 5.5× as many Gaussians as ReCo-Splat.",
   },
   dggt: {
     label: "DGGT",
-    gs: "5.47M",
+    gaussianCountsK: [5465, 5465, 5465, 5480],
     maxImages: "12",
     note: "Largest representation and the lowest image capacity in this comparison.",
   },
   worldmirror: {
     label: "WorldMirror",
-    gs: "2.38M",
+    gaussianCountsK: [2467, 2248, 2347, 2455],
     maxImages: "40",
     note: "About 3× the Gaussian count of ReCo-Splat, with a 40-image capacity.",
   },
   anysplat: {
     label: "AnySplat",
-    gs: "2.41M",
+    gaussianCountsK: [2509, 2320, 2359, 2461],
     maxImages: "28",
     note: "About 3× the Gaussian count of ReCo-Splat, with a 28-image capacity.",
   },
 };
+
+Object.values(methodData).forEach((data) => {
+  data.gsMeanMillions = data.gaussianCountsK.reduce((sum, count) => sum + count, 0)
+    / data.gaussianCountsK.length / 1000;
+  data.gs = `${data.gsMeanMillions.toFixed(2)}M`;
+});
+
+const largestGsMean = Math.max(...Object.values(methodData).map((data) => data.gsMeanMillions));
+const largestImageCapacity = Math.max(...Object.values(methodData).map((data) => Number(data.maxImages)));
 
 const chartRows = [...document.querySelectorAll(".bar-row[data-method]")];
 const selectedMethod = document.querySelector("#selected-method");
@@ -103,6 +115,11 @@ function selectMethod(method) {
 chartRows.forEach((row) => {
   const data = methodData[row.dataset.method];
   const isMaxImageChart = row.closest(".chart-panel")?.classList.contains("max-image-panel");
+  const barSize = isMaxImageChart
+    ? Number(data.maxImages) / largestImageCapacity
+    : data.gsMeanMillions / largestGsMean;
+  row.querySelector(".bar-fill").style.setProperty("--bar-size", `${barSize * 100}%`);
+  row.querySelector("strong").textContent = isMaxImageChart ? data.maxImages : data.gs;
   const value = isMaxImageChart ? `${data.maxImages} maximum images` : `${data.gs} mean Gaussians`;
   row.setAttribute("aria-label", `${data.label}: ${value}`);
 

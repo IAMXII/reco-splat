@@ -1,18 +1,18 @@
 :root {
-  --ink: #17202a;
-  --muted: #64707d;
-  --line: #dfe4ea;
+  --ink: #172733;
+  --muted: #61717e;
+  --line: #dfe6eb;
   --paper: #ffffff;
-  --canvas: #f4f6f8;
-  --accent: #ef5b45;
-  --accent-dark: #c83f2d;
-  --accent-soft: #fff0ec;
+  --canvas: #f7f9fb;
+  --accent: #e95e48;
+  --accent-dark: #bb4230;
+  --accent-soft: #fff1ec;
   --blue: #326c91;
   --blue-soft: #e8f2f8;
   --green: #377e61;
   --green-soft: #e7f4ee;
-  --shadow: 0 20px 55px rgba(31, 47, 61, 0.09);
-  --radius-lg: 24px;
+  --shadow: 0 16px 48px rgba(31, 47, 61, 0.065);
+  --radius-lg: 22px;
   --radius-md: 16px;
   --text-caption: 0.78rem;
   --text-detail: 0.88rem;
@@ -29,11 +29,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--canvas);
+  background: radial-gradient(ellipse 900px 580px at 50% 0, #fff0e8 0, transparent 85%), var(--canvas);
   color: var(--ink);
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 17px;
-  line-height: 1.75;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -69,12 +70,12 @@ button {
 .hero,
 main > section,
 footer {
-  width: min(1120px, calc(100% - 48px));
+  width: min(1180px, calc(100% - 56px));
   margin-inline: auto;
 }
 
 .hero {
-  padding: 88px 0 36px;
+  padding: 92px 0 48px;
   text-align: center;
 }
 
@@ -91,6 +92,16 @@ footer {
   text-transform: uppercase;
 }
 
+.eyebrow {
+  display: inline-block;
+  padding: 8px 13px;
+  border: 1px solid #ecdcd4;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.68rem;
+  letter-spacing: 0.11em;
+}
+
 h1,
 h2,
 h3,
@@ -105,25 +116,29 @@ h3 {
 }
 
 h1 {
-  max-width: 960px;
-  margin: 14px auto 20px;
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
-  line-height: 1.05;
+  max-width: 1000px;
+  margin: 22px auto 28px;
+  font-size: clamp(3.1rem, 6.5vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.03;
 }
 
 h1 span {
   display: block;
-  margin-top: 10px;
-  color: #46525e;
-  font-size: 0.59em;
-  font-weight: 560;
-  line-height: 1.2;
+  max-width: 880px;
+  margin: 16px auto 0;
+  color: #53636f;
+  font-size: 0.46em;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
 }
 
 h2 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3.15rem);
-  line-height: 1.1;
+  font-size: clamp(1.9rem, 3.6vw, 2.85rem);
+  line-height: 1.14;
 }
 
 h3 {
@@ -140,7 +155,7 @@ h3 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 48px;
+  margin-bottom: 42px;
 }
 
 .button {
@@ -148,14 +163,14 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-width: 112px;
-  padding: 11px 20px;
+  min-width: 108px;
+  padding: 12px 22px;
   border: 1px solid var(--ink);
   border-radius: 999px;
   background: var(--ink);
   color: white;
-  font-size: 0.92rem;
-  font-weight: 750;
+  font-size: 0.86rem;
+  font-weight: 700;
   line-height: 1.4;
   text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -181,22 +196,26 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid rgba(23, 32, 42, 0.08);
+  padding: 14px;
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: white;
   box-shadow: var(--shadow);
 }
 
 .teaser {
-  margin-top: 30px;
+  margin-top: 26px;
+  padding: 18px;
+  box-shadow: 0 20px 65px rgba(31, 47, 61, 0.10);
 }
 
 main > section {
-  padding: 72px 0;
+  padding: 76px 0;
+  border-top: 1px solid var(--line);
 }
 
 .section-heading {
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .split-heading {
@@ -287,20 +306,20 @@ section > ul {
 .dataset-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .dataset-card {
   position: relative;
   display: flex;
-  min-height: 278px;
+  min-height: 256px;
   flex-direction: column;
   overflow: hidden;
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--paper);
-  box-shadow: 0 10px 30px rgba(31, 47, 61, 0.04);
+  box-shadow: 0 3px 12px rgba(31, 47, 61, 0.025);
   text-decoration: none;
   transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
@@ -322,9 +341,9 @@ section > ul {
 .dataset-card:hover,
 .dataset-card:focus-visible {
   border-color: rgba(239, 91, 69, 0.55);
-  box-shadow: 0 20px 44px rgba(31, 47, 61, 0.1);
+  box-shadow: 0 12px 30px rgba(31, 47, 61, 0.075);
   outline: none;
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .dataset-card:hover::after,
@@ -369,7 +388,7 @@ section > ul {
 }
 
 .dataset-card h3 {
-  margin: 30px 0 8px;
+  margin: 26px 0 8px;
   font-size: 1.36rem;
 }
 
@@ -409,10 +428,11 @@ section > ul {
 
 .cards article,
 .two-column-methods article {
-  padding: 28px;
+  padding: 30px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--paper);
+  box-shadow: 0 3px 12px rgba(31, 47, 61, 0.025);
 }
 
 .cards h3 {
@@ -479,12 +499,12 @@ section > ul {
 }
 
 .result-module {
-  margin-top: 24px;
-  padding: 28px;
+  margin-top: 28px;
+  padding: 30px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--paper);
-  box-shadow: 0 14px 38px rgba(31, 47, 61, 0.06);
+  box-shadow: 0 8px 32px rgba(31, 47, 61, 0.045);
 }
 
 .result-module + .result-module {
@@ -697,6 +717,10 @@ section > ul {
   gap: 16px;
 }
 
+.analysis-pair > * {
+  min-width: 0;
+}
+
 .analysis-pair .paper-figure {
   border-radius: var(--media-radius);
   box-shadow: 0 10px 32px rgba(23, 32, 42, 0.08);
@@ -782,19 +806,27 @@ section > ul {
 .comparison-stage {
   --split: 50%;
   position: relative;
+  display: block;
+  width: 100%;
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(23, 32, 42, 0.12);
   border-radius: var(--media-radius);
-  aspect-ratio: 618 / 406;
   background: #0f171e;
   box-shadow: 0 10px 32px rgba(23, 32, 42, 0.12);
   isolation: isolate;
   touch-action: pan-y;
 }
 
-.comparison-stage.render-comparison {
-  aspect-ratio: 16 / 9;
+/* An in-flow spacer keeps the image stage open even without aspect-ratio support. */
+.comparison-stage::before {
+  display: block;
+  padding-top: 65.695793%;
+  content: "";
+}
+
+.comparison-stage.render-comparison::before {
+  padding-top: 56.25%;
 }
 
 .comparison-base,
@@ -992,9 +1024,9 @@ section > ul {
   text-transform: uppercase;
 }
 
-.ablation-table th:first-child,
-.ablation-table th:nth-child(2),
-.ablation-table td:nth-child(2) {
+.ablation-table thead th:nth-child(-n + 2),
+.ablation-table tbody th[scope="rowgroup"],
+.ablation-table tbody td:first-of-type {
   text-align: left;
 }
 
@@ -1014,7 +1046,7 @@ section > ul {
   background: var(--accent-soft);
 }
 
-.ablation-table .ours-row td:nth-child(2) {
+.ablation-table .ours-row td:first-of-type {
   color: var(--accent-dark);
   font-weight: 850;
 }
@@ -1091,7 +1123,7 @@ section > ul {
   align-items: center;
   gap: 24px;
   margin: 18px 0 16px;
-  padding: 22px 26px;
+  padding: 26px 28px;
   border-radius: var(--radius-md);
   background: var(--ink);
   color: white;
@@ -1139,7 +1171,7 @@ section > ul {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--paper);
-  box-shadow: 0 14px 38px rgba(31, 47, 61, 0.06);
+  box-shadow: 0 6px 24px rgba(31, 47, 61, 0.035);
 }
 
 .chart-title-row {
@@ -1193,10 +1225,13 @@ section > ul {
 }
 
 .bar-row:hover,
-.bar-row:focus-visible,
-.bar-row.is-active {
+.bar-row:focus-visible {
   background: #f4f6f8;
   outline: none;
+}
+
+.bar-row.is-active {
+  background: var(--accent-soft);
 }
 
 .bar-row:active {
@@ -1308,6 +1343,12 @@ footer a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(233, 94, 72, 0.45);
+  outline-offset: 3px;
+}
+
 @media (max-width: 900px) {
   .dataset-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1378,7 +1419,22 @@ footer a {
   }
 
   .hero {
-    padding-top: 58px;
+    padding-top: 52px;
+  }
+
+  .eyebrow {
+    max-width: 100%;
+    font-size: 0.6rem;
+  }
+
+  .teaser,
+  .figure {
+    padding: 6px;
+    border-radius: 14px;
+  }
+
+  .teaser {
+    box-shadow: 0 12px 32px rgba(31, 47, 61, 0.08);
   }
 
   main > section {

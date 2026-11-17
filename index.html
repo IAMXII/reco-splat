@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ReCo-Splat: Redundancy-aware Compact Feed-forward Gaussian Splatting.">
   <title>ReCo-Splat</title>
-  <link rel="stylesheet" href="style.css?v=20260718">
-  <script src="script.js?v=20260718" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261117">
+  <script src="script.js?v=20261117" defer></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
       <a class="button button-accent" href="#qualitative">Results <span aria-hidden="true">↓</span></a>
     </nav>
 
-    <img class="teaser" src="assets/teaser.png" alt="ReCo-Splat reconstruction and rendering overview">
+    <img class="teaser" src="assets/paper-20261117/teaser.webp" width="2800" height="1452" alt="ReCo-Splat reconstruction and rendering overview" fetchpriority="high">
   </header>
 
   <main id="main-content">
@@ -200,7 +200,7 @@
         </article>
       </div>
 
-      <img class="figure" src="assets/redundancy.png" alt="Intra-view and inter-view redundancy analysis">
+      <img class="figure" src="assets/paper-20261117/redundancy.webp" width="1800" height="807" alt="Rendering quality and Gaussian count as the number of input views increases" loading="lazy">
     </section>
 
     <section>
@@ -209,7 +209,7 @@
         <h2>Method Overview</h2>
       </div>
 
-      <img class="figure" src="assets/overview.png" alt="ReCo-Splat method overview">
+      <img class="figure" src="assets/paper-20261117/overview.webp" width="2800" height="1152" alt="ReCo-Splat method overview" loading="lazy">
       <p>
         Given sparse unordered images, ReCo-Splat first extracts geometry-aware
         and appearance-aware features. The Gaussian head predicts dense Gaussian
@@ -339,7 +339,7 @@
           <div class="overlap-panel">
             <p class="analysis-panel-label"><span>Inter-view</span> Overlap redundancy</p>
             <figure class="paper-figure overlap-figure">
-              <img src="assets/overlap_redundancy.png" alt="Red overlays show multi-view regions with redundant Gaussian coverage before opacity compression">
+              <img src="assets/paper-20261117/overlap_redundancy.webp" width="2000" height="954" alt="Red overlays show multi-view regions with redundant Gaussian coverage before opacity compression" loading="lazy">
               <figcaption>
                 Red regions mark projected 3D areas where multi-view synthesis generates
                 redundant Gaussians before opacity compression.
@@ -397,7 +397,7 @@
         <p class="section-kicker">Geometry</p>
         <h2>Geometry Reconstruction</h2>
       </div>
-      <img class="figure" src="assets/depth.png" alt="Geometry reconstruction comparison">
+      <img class="figure" src="assets/paper-20261117/depth.webp" width="2800" height="1129" alt="Geometry reconstruction comparison including F4Splat" loading="lazy">
     </section>
 
     <section id="efficiency" class="efficiency-section">
@@ -449,8 +449,8 @@
             </button>
             <button class="bar-row" type="button" data-method="da3" aria-pressed="false">
               <span class="method-name">DA3</span>
-              <span class="bar-track"><span class="bar-fill" style="--bar-size: 56.1%"></span></span>
-              <strong>3.07M</strong>
+              <span class="bar-track"><span class="bar-fill" style="--bar-size: 80.8%"></span></span>
+              <strong>4.42M</strong>
             </button>
             <button class="bar-row" type="button" data-method="dggt" aria-pressed="false">
               <span class="method-name">DGGT</span>
@@ -546,16 +546,16 @@
               <td>Dense Gaussian Output</td><td>21.1898</td><td class="best">0.7649</td><td class="best">0.1727</td><td>4,580k</td>
             </tr>
             <tr><td>w/o Intra-View Allocation</td><td>19.2929</td><td>0.7138</td><td>0.2307</td><td>1,145k</td></tr>
-            <tr><td>w/o Inter-View Compaction</td><td>21.2285</td><td>0.7501</td><td>0.1896</td><td>961k</td></tr>
+            <tr><td>w/o Inter-View Compaction</td><td class="second">21.2285</td><td class="second">0.7501</td><td class="second">0.1896</td><td class="second">961k</td></tr>
             <tr class="ours-row"><td>Ours</td><td class="best">21.2616</td><td class="best">0.7649</td><td>0.1897</td><td class="best">650k</td></tr>
 
             <tr>
               <th scope="rowgroup" rowspan="4">CP</th>
               <td>Dense Gaussian Output</td><td>22.3618</td><td>0.7095</td><td class="best">0.2440</td><td>7,269k</td>
             </tr>
-            <tr><td>w/o Intra-View Allocation</td><td>20.9746</td><td>0.6669</td><td>0.2631</td><td>1,623k</td></tr>
-            <tr><td>w/o Inter-View Compaction</td><td class="second">22.9125</td><td class="best">0.7294</td><td>0.2845</td><td>1,456k</td></tr>
-            <tr class="ours-row"><td>Ours</td><td class="best">23.0314</td><td>0.7250</td><td>0.2879</td><td class="best">1,045k</td></tr>
+            <tr><td>w/o Intra-View Allocation</td><td>20.9746</td><td>0.6669</td><td class="second">0.2631</td><td>1,623k</td></tr>
+            <tr><td>w/o Inter-View Compaction</td><td class="second">22.9125</td><td class="best">0.7294</td><td>0.2845</td><td class="second">1,456k</td></tr>
+            <tr class="ours-row"><td>Ours</td><td class="best">23.0314</td><td class="second">0.7250</td><td>0.2732</td><td class="best">1,045k</td></tr>
 
             <tr>
               <th scope="rowgroup" rowspan="4">Valley</th>
